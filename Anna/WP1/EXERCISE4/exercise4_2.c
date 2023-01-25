@@ -3,7 +3,7 @@
 
 int main(int argc, char *argv[])
 {
-    unsigned int binaryNum, hexNum = 0, base = 1;
+    unsigned long long binaryNum, hexNum = 0, base = 1;
     int remainder;
     if (argc > 1)
     {
@@ -13,13 +13,15 @@ int main(int argc, char *argv[])
             return 0;
         }
         // Read the binary number from the command line argument
-        sscanf(argv[1], "%d", &binaryNum);
+        sscanf(argv[1], "%lld", &binaryNum);
     }
     else
     {
-        //printf("Please enter a binary number:");
-        scanf("%d", &binaryNum);
+        scanf("%lld", &binaryNum);
     }
+    //printf("%ld\n",binaryNum);
+    //printf("%s\n",argv[1]);
+
     // Convert the binary number to hexadecimal
     while (binaryNum != 0)
     {
@@ -32,7 +34,7 @@ int main(int argc, char *argv[])
         // Remove the last digit from the binary number
         binaryNum /= 10;
     }
-    //hexNum &= 0xFF;
-    printf("%02X\n", hexNum);
+    //Print hexadecimal representation of 'hexNum' with at least 2 digits and leading zeroes if necessary
+    printf("%02llX\n", hexNum);
     return 0;
 }
