@@ -16,6 +16,7 @@ void dec2Bin(int n, int size)
         n = n / 2;
         i++;
     }
+    
     // Add padding to binary representation
     int padding = size - i;
     int counter = 0;
@@ -23,20 +24,13 @@ void dec2Bin(int n, int size)
     {
         printf("0");
         counter++;
-        if (counter % 8 == 0)
-        {
-            printf(" ");
-        }
     }
     for (int j = i - 1; j >= 0; j--)
     {
         printf("%d", binaryNum[j]);
         counter++;
-        if (counter % 8 == 0)
-        {
-            printf(" ");
-        }
     }
+    
 }
 
 int main(int argc, char *argv[])
