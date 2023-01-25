@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include <stdlib.h>
+/* C does not provide direct support for exception handling
+errno can be used for a similar purpose*/
 #include <errno.h>
 #include <string.h>
 
@@ -12,6 +16,7 @@ void dec2Bin(int n, int size)
         n = n / 2;
         i++;
     }
+    
     // Add padding to binary representation
     int padding = size - i;
     int counter = 0;
@@ -19,23 +24,16 @@ void dec2Bin(int n, int size)
     {
         printf("0");
         counter++;
-        if (counter % 8 == 0)
-        {
-            printf(" ");
-        }
     }
     for (int j = i - 1; j >= 0; j--)
     {
         printf("%d", binaryNum[j]);
         counter++;
-        if (counter % 8 == 0)
-        {
-            printf(" ");
-        }
     }
+    
 }
 
-int main(int argc, charargv[])
+int main(int argc, char *argv[])
 {
     int number, size;
     if (argc > 1)
@@ -45,15 +43,15 @@ int main(int argc, charargv[])
             printf("This program takes a positive number as an argument and outputs its binary representation.\n");
             return 0;
         }
-        char endptr;
+        char *endptr;
         errno = 0;
         // Convert string argument to int
         number = strtol(argv[1], &endptr, 10);
 
-        /If any of these conditions are true,
+        /*If any of these conditions are true,
         the program will print an error message
-        and exit with a return value of 2/
-        if (errno != 0 ||endptr != '\0' || number < 0)
+        and exit with a return value of 2*/
+        if (errno != 0 || *endptr != '\0' || number < 0)
         {
             printf("Invalid argument. Please enter a positive number.\n");
             return 2;
