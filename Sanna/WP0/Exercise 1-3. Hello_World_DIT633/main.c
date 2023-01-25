@@ -1,3 +1,8 @@
+// (C) Patricia Marklund, Anna Törngren, Sanna Evertsson, group: 10 __ (2023) 
+// Work package 0 
+// Exercise 3
+// Submission code: 19012302 (provided by your TA-s)
+
 // Include library
 #include <stdio.h>
 #include <string.h>

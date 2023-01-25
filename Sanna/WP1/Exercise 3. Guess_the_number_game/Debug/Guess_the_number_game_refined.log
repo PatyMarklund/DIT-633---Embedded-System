@@ -1,0 +1,6 @@
+﻿  main.c
+C:\Users\sanna\source\repos\Guess_the_number_game_refined\main.c(11,20): warning C4013: 'guessNumberGame' undefined; assuming extern returning int
+C:\Users\sanna\source\repos\Guess_the_number_game_refined\main.c(19,18): warning C4244: 'function': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\sanna\source\repos\Guess_the_number_game_refined\main.c(73,19): warning C4013: 'exitOrContinue' undefined; assuming extern returning int
+C:\Users\sanna\source\repos\Guess_the_number_game_refined\main.c(99): warning C4715: 'exitOrContinue': not all control paths return a value
+  Guess_the_number_game_refined.vcxproj -> C:\Users\sanna\source\repos\Guess_the_number_game_refined\Debug\Guess_the_number_game_refined.exe
