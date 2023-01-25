@@ -2,6 +2,7 @@
 #include <stdlib.h>
 /* C does not provide direct support for exception handling errno can be used for a similar purpose*/
 #include <errno.h>
+// read more: https://www.educative.io/answers/what-is-errno-in-c
 #include <string.h>
 
 // Function to convert decimal number to binary
