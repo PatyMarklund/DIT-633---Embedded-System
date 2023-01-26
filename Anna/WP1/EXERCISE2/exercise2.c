@@ -61,8 +61,8 @@ int main(int argc, char *argv[])
                     }
                 }
                 printf("Encrypted text: %s", input);
-            } while (1);
-        }
+            } while ( key!= EOF);
+        } else return 1;
     }
     // display error message if not enough arguments provided
     else
