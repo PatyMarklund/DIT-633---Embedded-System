@@ -4,9 +4,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define MAX 100      // Defines the maximum number of the values in the table
-#define MAXNUMBER 20 // Defines the maximum value of random numbers
-#define MINNUMBER 0  // Defines the minimum value of random numbers
+#define MAX 10      // Defines the maximum number of the values in the table
+#define MAXNUMBER 5 // Defines the maximum value of random numbers
 
 // This function generates a set of random numbers
 // and fills the table *tab with these numbers
@@ -16,24 +15,24 @@
 // The * symbol is used to declare a pointer variable
 void create_random(int *tab)
 {
-    int i;
-    for (i = 0; i < MAX; i++)
-    {
+    for (int i = 0; i < MAX; i++) {
         // generate a random number between MINNUMBER and MAXNUMBER
         // function: num = (rand() % (upper – lower + 1)) + lower
-        tab[i] = (rand() % (MAXNUMBER - MINNUMBER + 1)) + MINNUMBER;
+        tab[i] = rand() % (MAXNUMBER + 1);
+        printf("%d ", tab[i]);
     }
+    printf("\n");
 }
 
 // This function takes the *tab of random numbers
 // and creates a table with the frequency counts for these numbers
 void count_frequency(int *tab, int *freq)
 {
-    int i;
-    for (i = 0; i < MAXNUMBER; i++){
+
+    for (int i = 0; i < MAXNUMBER; i++){
         freq[i] = 0; // initialize the frequency array to 0
     }
-    for (i = 0; i < MAX; i++)
+    for (int i = 0; i < MAX; i++)
     {
         freq[tab[i]]++; // increment the frequency of the current number
     }
@@ -43,19 +42,14 @@ void count_frequency(int *tab, int *freq)
 // and draws a histogram of the values in that frequency table
 void draw_histogram(int *freq)
 {
-    int i;
-    for (i = 0; i < MAXNUMBER; i++)
-    {
-        if (freq[i] > 0)
-        {
+    for (int i = 0; i <= MAXNUMBER; i++){
             printf("%d   ", i);
-            int j;
-            for (j = 0; j < freq[i]; j++)
+            for (int j = 0; j < freq[i]; j++)
             {
-                printf("x");
+            printf("x");
             }
             printf("\n");
-        }
+
     }
 }
 

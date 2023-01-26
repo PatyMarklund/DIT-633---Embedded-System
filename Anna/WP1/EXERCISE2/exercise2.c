@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
             // display usage and terminate the program
             else
             {
-                printf("Error: Key needs to be a number:\nUsage ./exercise2 key\n");
+                printf("Error: Key needs to be a number\n");
                 printf("Usage ./exercise2 key\n");
                 return 1;
             }
@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
         // Caesar Cipher encryption formula
         if (valid_key == true)
         {
-            char input[300];
+            char input[100];
             // do loop execution until EOF is reached
             do
             {
@@ -61,8 +61,8 @@ int main(int argc, char *argv[])
                     }
                 }
                 printf("Encrypted text: %s", input);
-            } while (1);
-        }
+            } while ( key!= EOF);
+        } else return 1;
     }
     // display error message if not enough arguments provided
     else

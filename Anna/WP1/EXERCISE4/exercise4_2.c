@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
     {
         scanf("%lld", &binaryNum);
     }
-    //printf("%ld\n",binaryNum);
+    //printf("%lld\n",binaryNum);
     //printf("%s\n",argv[1]);
 
     // Convert the binary number to hexadecimal
