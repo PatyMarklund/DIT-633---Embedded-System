@@ -11,6 +11,19 @@
 // Define session
 #define MAX_NUMBER 5
 
+// ------ Function declarations   ----------
+
+// Function that creates a random number from 1 to 100
+int createRandomNumber();
+
+// Main function for guess the number game
+int guessNumberGame();
+
+// function to se if the player want to exit the game or play again
+int exitOrContinue();
+
+// ------ Main   ----------
+
 int main()
 {
     guessNumberGame(); // run function guessNumberGame
@@ -23,7 +36,7 @@ int createRandomNumber()
 {
     srand(time(0));                // use srand to seed a random number generator and time to make it different depending on the computers time
     int number = rand() % 100 + 1; // retrieves a random number between 1 - 100.
-    printf("%d\n", number);        // prints the random number created - used only for testing purposes
+    printf("This is the random number: %d\n", number);        // prints the random number created - used only for testing purposes
 
     return number; // returns the number created
 }
@@ -41,7 +54,7 @@ int guessNumberGame()
 
     do
     { // executes the body atleast once and as long as the while condition is true
-        printf("\nGuess the number:");
+        printf("\nGuess the number: ");
         read_number = scanf_s("%d", &guessedNumber); // reads the user input and assigns the value to guessedNumber.
                                                      // also assigns the number of items succesfully read by function inside read_number. If this value is 0, something other than a number has been provided
 
@@ -92,7 +105,7 @@ int exitOrContinue()
     int read_exit;      // declare an int that stores number of succesfully read values from input exit
 
 start: // start label. Is used by the goto function to know where to go.
-    printf("\nPress 1 to exit or any other number to play again:");
+    printf("\nPress 1 to exit or any other number to play again: ");
     read_exit = scanf_s("%d", &exitNumber); // Reads the user input and store the value in int exit.
                                             // Also stores the number of items succesfully read by function inside read_exit.
 
