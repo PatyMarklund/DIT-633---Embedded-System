@@ -7,7 +7,7 @@
 #include <stdio.h>
 
 // Main function in the program, no program arguments supported
-void main () {
+int main () {
 
     // Initialize the interger to be used as input from the user
     int userInput;
@@ -38,4 +38,6 @@ void main () {
             break;        // Stop the while loop and exit 
         }
     } while (userInput >= 1 && userInput <= 5);    // Codition: While the user input is 1, 2, 3, 4 or 5 continue the loop
+
+    return 0;
 } 

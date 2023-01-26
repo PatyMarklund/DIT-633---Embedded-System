@@ -26,6 +26,26 @@ void count_frequency(int *tab, int *freq );
 // and draws a histogram of the values in that frequency table 
 void draw_histogram(int *freq );  
  
+
+
+// ------ Main   -------------------------- 
+ 
+// The main entry point for the program 
+//  
+// If you choose to go for the optional part 
+// Please modify it accordingly 
+int main (void){ 
+ 
+    int table[MAX];     // Initialize the array table which has the size of the MAX defined
+    int frequency[MAXNUMBER];  // Initialize the array frequency which has the size of the MAXNUMBER defined
+ 
+    printf("Random array: \n");
+    create_random(table);         // Call the function and send table array as the parameter
+    count_frequency(table, frequency);     // Call the function and send the table and frequency array as the parameter
+    draw_histogram(frequency);      // Call the function and send the frequency array as the parameter
+
+    return 0;
+} 
 // ------ Function definitions   ---------- 
 
 // This function receive an int pointer to the array tab. This is good cause its not necessary to return the array
@@ -71,21 +91,3 @@ void draw_histogram(int *freq ){
     }
 }
  
-// ------ Main   -------------------------- 
- 
-// The main entry point for the program 
-//  
-// If you choose to go for the optional part 
-// Please modify it accordingly 
-int main (void){ 
- 
-    int table[MAX];     // Initialize the array table which has the size of the MAX defined
-    int frequency[MAXNUMBER];  // Initialize the array frequency which has the size of the MAXNUMBER defined
- 
-    printf("Random array: \n");
-    create_random(table);         // Call the function and send table array as the parameter
-    count_frequency(table, frequency);     // Call the function and send the table and frequency array as the parameter
-    draw_histogram(frequency);      // Call the function and send the frequency array as the parameter
-
-    return 0;
-} 
