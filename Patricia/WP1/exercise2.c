@@ -25,8 +25,8 @@ int main (int argc, char *argv[]) {
 
     // Ask user to input a text 
     printf("Enter the text to be encrypted and wait for the result! Continue until your're done and press ctrl+z to finish. \n");  
-    
-    while (fgets(userInput, sizeof(userInput), stdin) != NULL) {   // While the user inputs text and not a EOF the loop continues to run.
+    fgets(userInput, sizeof(userInput), stdin);
+    while (userInput[0] != EOF) {   // While the user inputs text and not a EOF the loop continues to run.
                                                                    // Using fgets function to be able to read the entire input from the user and not only the first string
 
         for(int i = 0; userInput[i] != '\0'; i++) {     //Loops through the array userinput until it reaches the end \0

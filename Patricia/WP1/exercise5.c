@@ -1,15 +1,15 @@
 // (C) Patricia Marklund, Anna Törngren, Sanna Evertsson, group: 10 (2023) 
 // Work package 1 
 // Exercise 5 
-// Submission code: xxxxx (provided by your TA-s)
+// Submission code: 10001001 (provided by your TA-s)
 
 // Include session
 #include <stdio.h> 
 #include <stdlib.h> 
  
 // Define session
-#define MAX 100 // Defines the maximum number of the values in the table 
-#define MAXNUMBER 20 // Defines the maximum value of random numbers 
+#define MAX 20 // Defines the maximum number of the values in the table 
+#define MAXNUMBER 5 // Defines the maximum value of random numbers 
  
  
 // ------ Function declarations   ----------  
@@ -32,10 +32,11 @@ void draw_histogram(int *freq );
 // as the modification made to the array will be saved directly using the pointer
 void create_random(int *tab) {
     for (int i = 0; i < MAX; i++) {   // Loop throught the array tab which has a size of the defined MAX number
-        tab[i] = rand() % MAXNUMBER;    // Create random numbers and store them in the array tab. Module makes sure the number is not higher than the defined MAXNUMBER 
-        printf("%d\t ", tab[i]);    // Print the array for display all in the same line with space between each index
+        tab[i] = rand() % (MAXNUMBER + 1);    // Create random numbers and store them in the array tab. Module makes sure the number is not higher than the defined MAXNUMBER 
+        printf("%d\t ", tab[i]);  // Print the array for display all in the same line with space between each index
+    }  
     printf("\n");
-}
+}    
 
 // Then you should write a function that for each possible number between 0 – MAXNUMBER 
 // The function calculates how many times the number exists in the array. The result is then stored in a new array (frequency []).
@@ -43,8 +44,8 @@ void count_frequency(int *tab, int *freq ){
     
     int count = 0;         // Interger to retain the count
 
-    for (int i = 0; i < MAXNUMBER; i++) {    // Loops through the possible numbers between 0 – MAXNUMBER
-        for (int j = 0; j < MAX; j++){       // Loop throught the array tab which has a size of the defined MAX number      
+    for (int i = 0; i <= MAXNUMBER; i++) {    // Loops through the possible numbers between 0 – MAXNUMBER
+        for (int j = 0; j <= MAX; j++){       // Loop throught the array tab which has a size of the defined MAX number      
             if (tab[j] == i) {         // Compare the index number from the first loop with the int value of the tab array 
                 count++;             // Increase the count everytime the index matches with a value in the tab array
             }
@@ -59,7 +60,7 @@ void count_frequency(int *tab, int *freq ){
 // Function that takes the array frequency [] as a parameter and draws a histogram 
 void draw_histogram(int *freq ){
     
-    for (int i = 0; i < MAXNUMBER; i++) {   // Loops through the array frequency MAXNUMBER
+    for (int i = 0; i <= MAXNUMBER; i++) {   // Loops through the array frequency MAXNUMBER
         if(!freq[i] == 0){                 // Check if the value in that current index is not equal 0. 
             printf("%d\t", i);             // Prints the index number
             for (int j = 0; j < freq[i]; j++){     // Loops through the freq[i]. So it will count for each number stored in the current index it will print a character
