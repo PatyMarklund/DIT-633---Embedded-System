@@ -7,6 +7,7 @@
 #include <stdio.h> 
 #include <stdlib.h> 
 #include <string.h>
+#include <ctype.h>
 
 enum DIRECTION {N,O,S,W}; 
  
@@ -21,6 +22,7 @@ void move(ROBOT * temp);  // means that the robot takes one step in the current 
 void turn(ROBOT * temp);  //means that the robot turns 90 degrees clockwise.
 void print_current_position(ROBOT * temp);
 char check_position(int position);
+int check_input(char *input);
 
 //###### Main program #######
 int main() {
@@ -33,17 +35,29 @@ int main() {
     ROBOT roberto;
     roberto.dir = N;
 
+    int valid = 1;
+
     printf("Enter the x-coordinate of the robot (Number from 0-99): ");
-    scanf("%5s", x_pos);
+    //scanf("%5s", x_pos);
+    fgets(x_pos, sizeof(x_pos), stdin);
+    valid = check_input(x_pos);
+    
+    if(valid) {
+        roberto.xpos = atoi(x_pos);
+    }else {
+        printf("Please enter only a number from 0-99: \n");
+    }  
 
     printf("Enter the y-coordinate of the robot (Number from 0-99): ");
-    scanf("%5s", y_pos);
-
-    int num = atoi(x_pos);
-    int num2 = atoi(y_pos);
-
-    roberto.xpos = num;
-    roberto.ypos = num2;
+    //scanf("%5s", y_pos);
+    fgets(x_pos, sizeof(y_pos), stdin);
+    valid = check_input(y_pos);
+    
+    if(valid) {
+        roberto.ypos = atoi(y_pos);
+    }else {
+        printf("Please enter only a number from 0-99: \n");
+    } 
 
     printf("Start position of the robot is x: %d an y: %d. Facing %d \n", roberto.xpos, roberto.ypos, roberto.dir);
 
@@ -64,6 +78,25 @@ int main() {
 
 //###### Function Definition #######
 
+int check_input(char *input) {
+    //input[strcspn(input, "\n")] = 0;  // remove the newline character
+    int valid = 0;
+    while(/* *input != '\n' */ !valid) {
+        for (int i = 0; *input != '\0'; i++) {
+            if(!isdigit(*input)){
+                valid = 0;
+                printf("Try again!\n");
+                //return 0;
+                break;
+            }else {
+                valid = 1;
+                break;
+            }
+        }
+        //input++;
+    }
+    return valid;
+}
 // means that the robot takes one step in the current direction
 void move(ROBOT * temp) {
     if (temp->dir == N) {
@@ -109,7 +142,7 @@ void turn(ROBOT * temp) {
     char * direction = "";
      char north [5] = "North";
     char east [4] = "East";
-    char south [5] = "South";
+    //char south [5] = "South";
     char west [4] = "West"; 
 
     switch (position) {
