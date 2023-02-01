@@ -3,6 +3,8 @@
 // Exercise 1
 // Submission code: xxxxx (provided by your TA-s)
 
+#define MAX 10
+
 //#### Include session ####
 #include <stdio.h> 
 #include <stdlib.h> 
@@ -22,78 +24,91 @@ void move(ROBOT * temp);  // means that the robot takes one step in the current 
 void turn(ROBOT * temp);  //means that the robot turns 90 degrees clockwise.
 void print_current_position(ROBOT * temp);
 char check_position(int position);
+void get_user_input(ROBOT * temp);
 int check_input(char *input);
 
 //###### Main program #######
 int main() {
 
-    //int i;
-    char movement[1];
-    char x_pos[5];
-    char y_pos[5];
-
+    char movement[MAX];
     ROBOT roberto;
-    roberto.dir = N;
+    int user_input;
 
-    int valid = 1;
+    while(1) {
+        
+        get_user_input(&roberto);
+        roberto.dir = N;
 
-    printf("Enter the x-coordinate of the robot (Number from 0-99): ");
-    //scanf("%5s", x_pos);
-    fgets(x_pos, sizeof(x_pos), stdin);
-    valid = check_input(x_pos);
-    
-    if(valid) {
-        roberto.xpos = atoi(x_pos);
-    }else {
-        printf("Please enter only a number from 0-99: \n");
-    }  
+        printf("Start position of the robot is x: %d an y: %d. Facing %d \n", roberto.xpos, roberto.ypos, roberto.dir);
 
-    printf("Enter the y-coordinate of the robot (Number from 0-99): ");
-    //scanf("%5s", y_pos);
-    fgets(x_pos, sizeof(y_pos), stdin);
-    valid = check_input(y_pos);
-    
-    if(valid) {
-        roberto.ypos = atoi(y_pos);
-    }else {
-        printf("Please enter only a number from 0-99: \n");
-    } 
+        printf("To move the robot, enter 'm' for moving forward and 't' to turn 90 degrees clockwise. You can enter as many movements as you like (mmtmt): ");
+        scanf("%s", movement);
 
-    printf("Start position of the robot is x: %d an y: %d. Facing %d \n", roberto.xpos, roberto.ypos, roberto.dir);
+        ROBOT * prRoberto = &roberto;
 
-    printf("To move the robot, enter 'm' for moving forward and 't' to turn 90 degrees clockwise: ");
-    scanf("%s", movement);
+        for (int i = 0; movement[i] != '\0'; i++) {
+            if (movement[i] == 'm' || movement[i] == 'M') {
+                move(prRoberto);
+            }else if (movement[i] == 't' || movement[i] == 'T') {
+                turn(prRoberto);
+            }
+        }  
 
-    ROBOT * prRoberto = &roberto;
+        //print_current_position(prRoberto);
+        printf("New position of the robot. x: %d an y: %d. Facing %d \n", roberto.xpos, roberto.ypos, roberto.dir);
 
-    if (movement[0] == 'm' || movement[0] == 'M') {
-        move(prRoberto);
-    }else if (movement[0] == 't' || movement[0] == 'T') {
-        turn(prRoberto);
-    }  
-
-    //print_current_position(prRoberto);
-    printf("New position of the robot. x: %d an y: %d. Facing %c ", roberto.xpos, roberto.ypos, roberto.dir);
+        printf("Press 'q' for leaving the program or 'c' to continue: ");
+        scanf("%d\n", user_input);
+        user_input = getchar();
+        getchar();
+        if(user_input == 'q' || user_input  == 'Q'){
+            break;
+        }
+        fflush(stdin);
+    }
+    return 0;
 }
 
 //###### Function Definition #######
 
-int check_input(char *input) {
-    //input[strcspn(input, "\n")] = 0;  // remove the newline character
-    int valid = 0;
-    while(/* *input != '\n' */ !valid) {
-        for (int i = 0; *input != '\0'; i++) {
-            if(!isdigit(*input)){
-                valid = 0;
-                printf("Try again!\n");
-                //return 0;
-                break;
-            }else {
-                valid = 1;
-                break;
-            }
+void get_user_input(ROBOT * temp){
+    char x_pos[5];
+    char y_pos[5];
+    int valid;
+    do {
+        printf("Enter the x-coordinate of the robot (Number from 0-99): ");
+        fgets(x_pos, sizeof(x_pos), stdin); 
+    
+        if(valid = check_input(x_pos) && strlen(x_pos) <= 3) {
+            temp->xpos = atoi(x_pos);
+            break;  
+        }else {
+            printf("Try again! Enter a number from 0 - 99 \n");
         }
-        //input++;
+    } while (1);
+    
+    while (1) {
+        printf("Enter the y-coordinate of the robot (Number from 0-99): ");
+        fgets(y_pos, sizeof(y_pos), stdin); 
+    
+        if(valid = check_input(y_pos) && strlen(y_pos) <= 3) {
+            temp->ypos = atoi(y_pos);
+            break;  
+        }else {
+            printf("Try again! Enter a number from 0 - 99 \n");
+        }
+    }
+}
+
+int check_input(char *input) {
+    int valid = 0;
+    for (int i = 0; input[i] != '\n'; i++) {
+        if(isdigit(input[i]) == 0) {
+            valid = 0;
+            break;
+        }else {
+            valid = 1;
+        }
     }
     return valid;
 }
@@ -131,14 +146,14 @@ void turn(ROBOT * temp) {
     }
 }
 
-/* void print_current_position(ROBOT * temp) {
+void print_current_position(ROBOT * temp) {
     int direction = temp->dir;
     char * position = "";
     position = check_position(direction);
     printf("New position of the robot. x: %d an y: %d. Facing %d ", temp->xpos, temp->ypos, position);
-} */
+}
 
-/* char check_position(int position) {
+char check_position(int position) {
     char * direction = "";
      char north [5] = "North";
     char east [4] = "East";
@@ -154,5 +169,5 @@ void turn(ROBOT * temp) {
             break;
     }
     return direction; 
-}*/
+}
 
