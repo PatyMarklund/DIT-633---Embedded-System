@@ -40,8 +40,8 @@ int main(int argc, char *argv[])
         (brake1 << 1) |    // shifted left by 1, multiplies 2
         brake2;            // set to value of brake2, Bit no 0, LSB = Least Significant Bit
 
-    // For controll - to be removed. 
-    printf("controll: %d\n", packed);
+    // For additional controll 
+    // printf("controll: %d\n", packed);
 
     // Print as a 2-digit hexadecimal number using printf with format specifier %02X
     printf("%02X\n", packed);
