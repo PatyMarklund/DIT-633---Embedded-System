@@ -36,13 +36,13 @@ int main(int argc, char *argv[])
     int brake1 = (packed & 0x02) >> 1;      //0x02, which is 00000010 in binary, divide value by 2^1
     int brake2 = packed & 0x01;             //0x01, which is 00000001 in binary, result either 0 or 1
 
-    printf("Name Value\n");
+    printf("Name\t\t Value\n");
     printf("-----------------------------\n");
-    printf("engine_on %d\n", engine_on);
-    printf("gear_pos %d\n", gear_pos);
-    printf("key_pos %d\n", key_pos);
-    printf("brake1 %d\n", brake1);
-    printf("brake2 %d\n", brake2);
+    printf("engine_on\t %d\n", engine_on);
+    printf("gear_pos\t %d\n", gear_pos);
+    printf("key_pos\t\t %d\n", key_pos);
+    printf("brake1\t\t %d\n", brake1);
+    printf("brake2\t\t %d\n", brake2);
 
     // The program returns 0 indicating success.
     return 0;

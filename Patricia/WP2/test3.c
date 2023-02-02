@@ -34,7 +34,7 @@ typedef struct {
 //###### Function Declaration #######
 
 PERSON *input_record();    // Reads a person’s record. 
-void write_new_file(PERSON *inrecord);  // Creates a file and writes the first record
+void write_new_file(PERSON *inrecord, FILE *fileptr, char *fileName);  // Creates a file and writes the first record
 void printfile(PERSON *inrecord, char *fileName);     // Prints out all persons in the file 
 void search_by_firstname(char *name, PERSON *inrecord, char *fileName); // Prints out the person if in list   
 void append_file(char *fileName);    // appends a new person to the file 
@@ -71,11 +71,10 @@ void menu() {
     scanf("%d", &menu_choice);
     printf("The choice %d\n", menu_choice);
 
-    
     switch (menu_choice)
     {
         case 1:   // Create a new and delete the old file.
-            write_new_file(inrecord);   // OK
+            write_new_file(inrecord, fileptr, fileName);   // OK
             break;
         case 2:  // Add a new person to the file
             append_file(fileName);
@@ -88,17 +87,16 @@ void menu() {
             break;
         case 5:  // Exit the program
             exit(0);
-            //break;
+            break;
         default:
             printf("invalid choice\n");
             break;
-            //exit(0);
     }
 
     free(inrecord);
 }
 
-void write_new_file(PERSON *inrecord) {
+void write_new_file(PERSON *inrecord, FILE *fileptr, char *fileName) {
     //Program creates a new file with the specified filename (hardcoded, fixed) and writes a first dummy record to 
     //the file and then close it.
     //remove(fileName);
@@ -117,13 +115,13 @@ void write_new_file(PERSON *inrecord) {
         exit(0);
     } 
 
-    /* for (int n = 0; n < total; n++){
+    for (int n = 0; n < total; n++){
         fwrite(inrecord, sizeof(PERSON), total, fileptr);
         inrecord++;
-    } */
+    }
 
-    if (fwrite(inrecord, sizeof(PERSON), total, fileptr) != total) 
-        return;
+    /* if (fwrite(inrecord, sizeof(PERSON), total, fileptr) != total) 
+        return 1; */
 
     printf("File written ok! \n");
 
@@ -211,7 +209,6 @@ void printfile(PERSON *inrecord, char *fileName) {
 
 PERSON *input_record() {
     //Reads a person’s record.
-    int i;
     PERSON *person;
     const int total = 1;
     person = malloc(sizeof(PERSON) * total);
@@ -220,38 +217,14 @@ PERSON *input_record() {
     char familyName [MAX_NAME];
     char personalNumber [MAX_PNUM];
 
-    while (1) {
-        printf("Enter the first name: \n");
-        scanf("%s", firstName);
+    printf("Enter the first name: \n");
+    scanf("%s", firstName);
 
-        if (strlen(firstName) > MAX_NAME - 1) {
-            printf(ERROR_MSG);
-        }else {
-            break;
-        }
-    }
+    printf("Enter the family name: \n");
+    scanf("%s", familyName);
 
-    while (1) {
-        printf("Enter the family name: \n");
-        scanf("%s", familyName);
-
-        if (strlen(familyName) > MAX_NAME - 1) {
-            printf(ERROR_MSG);
-        }else {
-            break;
-        }
-    }
-
-    while (1) {
-        printf("Enter the personal number with 12 digits: \n");
-        scanf("%s", personalNumber);
-
-        if (strlen(personalNumber) > MAX_PNUM - 1) {
-            printf(ERROR_MSG);
-        }else {
-            break;
-        }
-    }
+    printf("Enter the personal number with 12 digits: \n");
+    scanf("%s", personalNumber);
 
     strcpy(person->famname, familyName);
     strcpy(person->firstname, firstName);
