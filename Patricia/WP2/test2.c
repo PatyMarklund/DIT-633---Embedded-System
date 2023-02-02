@@ -1,7 +1,7 @@
 // (C) Patricia Marklund, Anna Törngren, Sanna Evertsson, group: 10 (2023)
 // Work package 2
 // Exercise 2
-// Submission code: 11200250 (provided by your TA-s)
+// Submission code: xxxxx (provided by your TA-s)
 
 //#### Include session ####
 #include <stdio.h> 
@@ -22,49 +22,68 @@ typedef struct q{
  
 REGTYPE* random_list(void);  // Create a linked list with random numbers
 REGTYPE* add_first(REGTYPE* temp, int data);  // Add a new number number to the beginning of the linked list
-REGTYPE* print_linked_list(REGTYPE* temp, REGTYPE* head, REGTYPE* last);  // Print the linked list
-void print_reverse(REGTYPE* last);  // Print the linked list in reverse using the prev pointer
+REGTYPE* print_linked_list(REGTYPE* temp, REGTYPE* head, REGTYPE* old);  // Print the linked list
+void print_reverse(REGTYPE* old);  // Print the linked list in reverse using the prev pointer
  
 //###### Main program ####### 
 int main(int argc, char *argv[]) 
 { 
-    int nr=0;   // Initialize counter
+    int nr=0;   // Counter
     int newEntry = 100;  // New number to be added to the list in the future
  
     // Declare the pointers to the linked list. act_post is the current
     // head is the returned top node from the functions
     // act_post_old is where we save the last node so we can use to print in reverse
-    REGTYPE *act_post , *head=NULL, *act_post_last = NULL; 
+    REGTYPE *act_post , *head=NULL, *act_post_old = NULL; 
  
     srand(time(0));     // Random seed  
 
     // Call function to create a linked list
     head = random_list();    // Return the first node (head) of the list
 
+    //act_post = head;   // Save the current list to the head
+
     printf("Linked list created with random numbers:");
+
+    /* while( act_post!=NULL){ 
+            printf("\n Post nr %d : %d" , nr++, act_post->number); 
+            act_post_old = act_post;    // assign to act_post_old the last node of the list
+            act_post=act_post->next; 
+    } */
     
-    // Call function to print the linked list
-    // Return the last node of list and save in the act_port_old pointer
-    act_post_last = print_linked_list(act_post, head, act_post_last);  
+    act_post_old = print_linked_list(act_post, head, act_post_old);   // Call function to print the linked list
 
     // Adding a new entry on the list. Call the function to add a new number
     // The return node will become the new head
     head = add_first(head, newEntry);  
 
+    //printf("\n\n");
+
+    //act_post = head;  // Save the current position to head 
+    //nr = 0;    // Reset the counter
+
     printf("Linked list adding a new entry to the beggining of the list:");
+    /* while( act_post!=NULL){ 
+           printf("\n Post nr %d : %d" , nr++, act_post->number); 
+           act_post=act_post->next; 
+    } */
+    print_linked_list(act_post, head, act_post_old);   // Call function to print the linked list
 
-    print_linked_list(act_post, head, act_post_last);   // Call function to print the linked list
-
+    //nr = 0;
     printf("Print reverse using prev pointer:");
+    print_reverse(act_post_old);
 
-    // Call the function to print the linked list in reverse order. Using the prev pointer
-    print_reverse(act_post_last);
+    /* while (act_post_old != NULL) {
+        printf("\n Post nr %d: %d", nr++, act_post_old-> number);
+        act_post_old = act_post_old -> prev;
+    } */
  
-    // --- Free the allocated memory  --- 
-    while((act_post=head)!=NULL){ 
-        head=act_post->next; 
-        free(act_post); 
-    } 
+ // --- Free the allocated memory  --- 
+ 
+  while((act_post=head)!=NULL){ 
+     head=act_post->next; 
+     free(act_post); 
+  } 
    
   return 0; 
 } 
@@ -73,7 +92,6 @@ int main(int argc, char *argv[])
 
 //###### Function Definition #######
  
-// Function creates a linked list of random numbers
 REGTYPE* random_list(void ){ 
     int i = 0;   
     /* Initialize 3 pointers to the REGTYPE list. Top is the head, old is the last item added to the list
@@ -94,13 +112,14 @@ REGTYPE* random_list(void ){
             old = item;     // Sets the current element as the old element of the list
         }
     }
-    return(top);   // Return the first node
+    return(top); 
 } 
  
 //==========================================================                 
  
-/* Adds a new record to the first position of the list and assign the field numbers the value of data. 
-The function must return a pointer to the new first entry in the list. */
+/*That adds a new record to the first position of the list and assign the field numbers the value of data. 
+The function must return a pointer to the new first entry in the list. Extend main() so that this 
+function is tested.*/
 REGTYPE* add_first(REGTYPE* temp, int data){ 
 
     REGTYPE *newItem;   // Create a new node that will be used in the first position
@@ -114,31 +133,27 @@ REGTYPE* add_first(REGTYPE* temp, int data){
 } 
 
 // Function that prints the linked list
-REGTYPE* print_linked_list(REGTYPE* temp, REGTYPE* head, REGTYPE* last) {
-    int nr = 0; // Initialize counter
+REGTYPE* print_linked_list(REGTYPE* temp, REGTYPE* head, REGTYPE* old) {
+    int nr = 0;
 
     temp = head;    // Sets the temporary (current) pointer to the head of the list
 
-    while(temp != NULL){   // Run the loop until reach a node that points to NULL, which means is the last
-           printf("\n Post nr %d: %d", nr++, temp-> number);  // Print the number and value of the corresponded node
-           last = temp;  // Save the latest node into the last. So we can keep track of the last node visited
-           temp = temp-> next;  // Set the position to the next item in the list
+    while(temp != NULL){ 
+           printf("\n Post nr %d: %d", nr++, temp-> number); 
+           old = temp;
+           temp = temp-> next; 
     }
     printf("\n\n");
 
-    return (last);  // Return the last item (which is the last node of the list)
+    return (old);
 }
 
-// Prints linked list in reverse
-// Uses the prev pointer instead of the next. 
-// Starts printing from the last node visited and increment pointing to the previous number
-void print_reverse(REGTYPE* last) {
-    int nr = 0;   // Initialize counter
+void print_reverse(REGTYPE* old) {
+    int nr = 0;
 
-    // Run the loop until reach a node that points to NULL
-    while (last != NULL) {    // which in this case is the previous of the first node
-        printf("\n Post nr %d: %d", nr++, last-> number);   // Print the number and value of the corresponded node
-        last = last -> prev;  // Set the position to the prev item in the list
+    while (old != NULL) {
+        printf("\n Post nr %d: %d", nr++, old-> number);
+        old = old -> prev;
     }
 
     printf("\n\n");

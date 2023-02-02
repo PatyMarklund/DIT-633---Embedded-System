@@ -54,8 +54,9 @@ int main() {
             }
         }  
 
+        const char heading[] = {'N', 'E', 'S', 'W'};
         //print_current_position(prRoberto);
-        printf("New position of the robot. x: %d an y: %d. Facing %d \n", roberto.xpos, roberto.ypos, roberto.dir);
+        printf("New position of the robot. x: %d an y: %d. Facing %c \n", roberto.xpos, roberto.ypos, heading[roberto.dir]);
 
         printf("Press 'q' for leaving the program or 'c' to continue: ");
         scanf("%d\n", user_input);
@@ -66,6 +67,8 @@ int main() {
         }
         fflush(stdin);
     }
+
+
     return 0;
 }
 
@@ -115,20 +118,16 @@ int check_input(char *input) {
 // means that the robot takes one step in the current direction
 void move(ROBOT * temp) {
     if (temp->dir == N) {
-        //temp->xpos += 1;
         temp->ypos += 1;
         temp->dir = N;
     }else if (temp->dir == O) {
         temp->xpos += 1;
-        //temp->ypos += 1;
         temp->dir = O;
     }else if (temp->dir == S) {
-        //temp->xpos += 1;
         temp->ypos -= 1;
         temp->dir = S;
     }else if (temp->dir == W) {
         temp->xpos -= 1;
-        //temp->ypos += 1;
         temp->dir = W;
     }
 }
@@ -147,17 +146,18 @@ void turn(ROBOT * temp) {
 }
 
 void print_current_position(ROBOT * temp) {
-    int direction = temp->dir;
-    char * position = "";
-    position = check_position(direction);
-    printf("New position of the robot. x: %d an y: %d. Facing %d ", temp->xpos, temp->ypos, position);
+    //int direction = temp->dir;
+    const char heading[] = {'N', 'E', 'S', 'W'};
+    //char * position = "";
+    //position = check_position(direction);
+    printf("New position of the robot. x: %d an y: %d. Facing %d ", temp->xpos, temp->ypos, heading[temp->dir]);
 }
 
-char check_position(int position) {
+/* char check_position(int position) {
     char * direction = "";
-     char north [5] = "North";
+    char north [5] = "North";
     char east [4] = "East";
-    //char south [5] = "South";
+    char south [5] = "South";
     char west [4] = "West"; 
 
     switch (position) {
@@ -169,5 +169,5 @@ char check_position(int position) {
             break;
     }
     return direction; 
-}
+} */
 
