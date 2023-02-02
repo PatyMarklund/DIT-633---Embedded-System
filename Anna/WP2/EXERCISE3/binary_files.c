@@ -111,7 +111,7 @@ PERSON input_record(void)
     scanf("%s", p.pers_number);
 
     // input validation, accoring pre.defined max lenght
-    while (strlen(p.pers_number) != MAX_PNUM - 2)
+    while (strlen(p.pers_number) != MAX_PNUM - 1)
     {
         printf("Error, please enter a valid number (YYYYMMDDNNN): ");
         scanf("%s", p.pers_number);
@@ -132,7 +132,7 @@ void write_new_file(PERSON *inrecord)
         printf("Error: Cannot create file\n"); // Print error message if file couldn't be opened
         return;
     }
-    // // Write the data of inrecord to the file if it's not NULL
+    // Write the data of inrecord to the file if it's not NULL
     if (inrecord != NULL)
     {
         // Use the fwrite() function to write the data
@@ -191,9 +191,9 @@ void search_name()
 
 void search_by_firstname(char *name)
 {
-    FILE *fptr; // Declare a file pointer `fptr` to access the file.
-    PERSON p;   // Create a person struct to store data read from the file
-    fptr = fopen(FILE_NAME, "rb"); // rb = Open an existing file for reading (binary)
+    FILE *fptr;                     // Declare a file pointer `fptr` to access the file.
+    PERSON p;                       // Create a person struct to store data read from the file
+    fptr = fopen(FILE_NAME, "rb");  // rb = Open an existing file for reading (binary)
     
     // Check if the file was successfully opened or if it's empty
     if (fptr == NULL)
