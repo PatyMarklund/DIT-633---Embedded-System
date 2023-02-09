@@ -1,4 +1,7 @@
+// (C) Patricia Marklund, Anna Törngren, Sanna Evertsson, group: 10 (2023)
+// Work package 3
 // EXERCISE 5: POINTERS AND ARRAYS
+// Submission code: 45100310 (provided by your TA-s)
 
 /* Write a program that creates an array of integers, array[MAX], and then fill it 
 with MAX number of random integers from 1 to 99. Let then the program prints out 
@@ -7,11 +10,13 @@ the following: */
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#define MAX 5
+
+#define MAX 20
+#define MAX_NO 99
 
 int main() {
 
-    int array[MAX];      // Initialize array of MAX (5)
+    int array[MAX];      // Initialize array of MAX (20)
     int *ptr = array;    // Set *Ptr to point to array[MAX]
     int i;               // Counter
 
@@ -24,9 +29,8 @@ int main() {
         // Assign a random value to the i-th element of the array using pointer arithmetic
         // i is the offset to the pointer and indicates which element of the array should be referenced
         // The parentheses are necessary because the precedence of * is higher than the precedence of +
-        *(ptr + i) = rand() % 99 + 1;
+        *(ptr + i) = rand() % MAX_NO + 1;
     }
-
     printf("The value of the address of the array (pointer) is: %p\n", array);
     printf("First integer in the array is (array[0]): %d\n", array[0]);
     printf("The last integer in the array is: %d\n", array[MAX - 1]);
