@@ -1,7 +1,7 @@
 // (C) Patricia Marklund, Anna Törngren, Sanna Evertsson, group: 10 (2023)
 // Work package 3
 // Exercise 6 (ARRAYS AND FILES)
-// Submission code: xxxxx (provided by your TA-s)
+// Submission code: 45100310 (provided by your TA-s)
 
 /* Write a program that reads in a string with a maximum of 20 characters from
 the keyboard and stores the string in a local string variable. */
@@ -10,7 +10,7 @@ the keyboard and stores the string in a local string variable. */
 #include <string.h>
 #include <unistd.h>
 
-#define MAX 21  // Holds 20 characters plus a null terminator
+#define MAX 20  // Holds 20 characters plus a null terminator
 
 #define ERROR_MSG1 "Error: Failed to read input from keyboard"
 #define ERROR_MSG2 "Error: Failed to read input from file or empty file"
@@ -21,8 +21,8 @@ void copyString(char *destination, char *source);
 
 int main()
 {
-    char stringInput[MAX];
-    char stringCopied[MAX];
+    char stringInput[MAX +1];
+    char stringCopied[MAX +1];
 
     // Check if input is from keyboard or file
     // isatty() is a function that returns 1 if the fd - (file descriptor) refers to a terminal.
@@ -30,7 +30,7 @@ int main()
     {
         // Input is from keyboard
         printf("Enter a string (max 20 characters): ");
-        if (fgets(stringInput, MAX, stdin) == NULL)
+        if (fgets(stringInput, MAX +1, stdin) == NULL)
         {
             printf( ERROR_MSG1 "\n");
             return 1;
@@ -39,7 +39,7 @@ int main()
     else
     {
         // Input is from file
-        if (fgets(stringInput, MAX, stdin) == NULL)
+        if (fgets(stringInput, MAX +1, stdin) == NULL)
         {
             printf( ERROR_MSG2 "\n");
             return 1;
