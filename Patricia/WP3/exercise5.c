@@ -24,7 +24,7 @@ int main()
     int *ptrarray = array;
     int lastInteger;
 
-    for (int i = 0; i <= MAX; i++) {
+    for (int i = 0; i < MAX; i++) {
         array[i] = rand() % MAX_NUMBER + 1;
         if(i == MAX){
            lastInteger = array[i];
@@ -38,10 +38,11 @@ int main()
     printf("The value of the address of the array (pointer) is: %p\n", &array);
     printf("First integer in the array is (array[0]): %d\n", *ptrarray);
     printf("First integer in the array is (array[0]): %d\n", array[0]);
-    printf("The last integer in the array is: %d\n", lastInteger);
-    printf("The last integer in the array is: %d\n", ptrarray[MAX]);
+    //printf("The last integer in the array is: %d\n", lastInteger);
+    printf("The last integer in the array is: %d\n", ptrarray[MAX - 1]);
+    //printf("The last integer in the array is: %d\n", array[MAX - 1]);
     printf("The size of an integer (number of bytes) is: %lu\n", sizeof(lastInteger));
-    printf("The size of the whole array in bytes is: %lu\n", sizeof(ptrarray));
+    //printf("The size of the whole array in bytes is: %lu\n", sizeof(ptrarray));
     printf("The size of the whole array in bytes is: %llu\n", sizeof(array));
    
     /*The program shall then, by use of a pointer, print out each integer value and
