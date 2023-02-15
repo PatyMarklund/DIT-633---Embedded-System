@@ -1,3 +1,8 @@
+// (C) Patricia Marklund, Anna Törngren, Sanna Evertsson, group: 10 (2023)
+// Work package 4
+// Exercise 4 
+// Submission code: xxxxx (provided by your TA-s)
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -41,7 +46,7 @@ void sort (int number, int tab []) {
     int temp = 0;
 
     for(int i = 0; i < number - 1; i++) {
-        for(int j = i; j < number - i - 1; j++) {
+        for(int j = i; j < number - i - 1; j++) {    //Set j = i so j will not return to the minumum index that was already checked
             /*if(i > j){
                 break;*/
             if (tab[j] > tab[j + 1]){
