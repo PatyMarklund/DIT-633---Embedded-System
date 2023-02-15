@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 // Function declaration
 int search_number(int number, int *tab, int size);
@@ -12,8 +13,12 @@ int main()
     int size = sizeof(test) / sizeof(test[0]);
     int number;
 
-    printf("Write a number (1-70): \n");
-    scanf("%d", &number);
+    printf("Write a number (1-70): ");
+    // Read input from user and validate
+    if (scanf("%d", &number) != 1 || number < 1 || number > 70) {
+        printf("Invalid input. Please enter a number between 1 and 70.\n");
+        return 1;
+    }
 
     search_number(number, test, size);
     bubbleSort(size, test);
