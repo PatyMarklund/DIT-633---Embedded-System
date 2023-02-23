@@ -19,6 +19,13 @@
 #define TIMER_MAX 65536
 #define TIMER_MIN 257
 
+//Temperature range variables
+#define temp_min 0        //between -40 to 0 degrees
+#define temp_max_25 25    //between 1 to 25 degrees
+#define temp_max_50 50    //between 26 to 50 degrees
+#define temp_max_75 75    //between 51 to 75 degrees
+#define temp_max 100      //above 100 degrees
+
 //Initialize temperature variables
 int time = 0;
 int tempValue = 0;
@@ -26,20 +33,12 @@ float voltage;
 int temperatureC;
 const int temp_meter = A0;
 
-//Temperature range variables
-const int temp_min = 0;      //between -40 to 0 degrees
-const int temp_max_25 = 25;  //between 1 to 25 degrees 
-const int temp_max_50 = 50;  //between 26 to 50 degrees 
-const int temp_max_75 = 75;  //between 51 to 75 degrees
-const int temp_max = 100;     //above 100 degrees
-
 // Setup the NeoPixel library and tell it how many pixels, and which pin to use to send signals.
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIXEL_PIN, NEO_GRB + NEO_KHZ800);
 
 void setup() {
   Serial.begin(9600); 
   //Define pins as output/inputs
-  pinMode(PIXEL_PIN, OUTPUT);
   pinMode(buzz, OUTPUT);
   pinMode(temp_meter, INPUT);
   
@@ -139,15 +138,12 @@ ISR(TIMER1_COMPA_vect){
     pixels.setPixelColor(13, pixels.Color(250,0,0));
     pixels.setPixelColor(14, pixels.Color(250,0,0));
     pixels.setPixelColor(15, pixels.Color(250,0,0));
-    pixels.setPixelColor(16, pixels.Color(250,0,0));
   }
   pixels.show();     //Display the pixels
   
   if(temperatureC > 120){   //Check if the temperature is higher than 120
-    //digitalWrite(PIN, HIGH);
     digitalWrite(buzz, HIGH);   //Sound the buzzed and lid up the LED that is connected in series 
-  }else {   
-    //digitalWrite(PIN, LOW);    
+  }else {       
     digitalWrite(buzz, LOW);    //Otherwise the buzzer and LED is off
   }
 }
@@ -161,18 +157,4 @@ void measureTemp() {
 }
 
 void loop() {   //For loop is empty as we use interrrupts
-  // For a set of NeoPixels the first NeoPixel is 0, second is 1, all the way up to the count of pixels minus one.
-
-  /*for(int i = 0; i < NUMPIXELS; i++){
-
-    // pixels.Color takes RGB values, from 0,0,0 up to 255,255,255
-    pixels.setPixelColor(i, pixels.Color(0,150,0)); 
-    // Moderately bright green color.
-
-    pixels.show(); 
-    // This sends the updated pixel color to the hardware.
-
-    delay(delayval); 
-    // Delay for a period of time (in milliseconds).
-  }*/
 }
