@@ -1,8 +1,9 @@
 // (C) Patricia Marklund, Anna Törngren, Sanna Evertsson, group: 10 (2023)
 // Work package 4
-// EXERCISE 4: LISTS
+// Exercise 4: LISTS
 // Submission code: 14000401 (provided by your TA-s)
 
+//Include session
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
